@@ -128,8 +128,8 @@ begin
 		   o_data => w_seg_n,
 		   o_sel(3) => an(0),
 		   o_sel(2) => an(3),
-		   o_sel(1) => an(1),
-		   o_sel(0) => an(0)
+		   o_sel(1) => an(2),
+		   o_sel(0) => an(1)
 	   );
 	-- CONCURRENT STATEMENTS ----------------------------
 	
