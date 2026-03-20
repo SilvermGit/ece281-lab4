@@ -93,7 +93,7 @@ begin
 	elevator_inst1 : elevator_controller_fsm
 	   port map (
 	       i_clk => w_clk,
-	       i_reset => btnR or btnU,
+	       i_reset => btnR,
 	       is_stopped => sw(0),
 	       go_up_down => sw(1),
 	       o_floor => w_floor1 
@@ -101,7 +101,7 @@ begin
 	elevator_inst2 : elevator_controller_fsm
 	   port map (
 	       i_clk => w_clk,
-	       i_reset => btnR or btnU,
+	       i_reset => btnR,
 	       is_stopped => sw(14),
 	       go_up_down => sw(15),
 	       o_floor => w_floor2
@@ -123,19 +123,18 @@ begin
 	       i_reset => btnU,
            i_D3 => w_floor1,
 		   i_D2 => w_floor2,
-		   i_D1 => "1111",
-		   i_D0 => "1111",
+		   i_D1 => "0000",
+		   i_D0 => "0000",
 		   o_data => w_seg_n,
 		   o_sel(3) => an(0),
 		   o_sel(2) => an(3),
-		   o_sel(1 downto 0) => "00"
+		   o_sel(1) => an(1),
+		   o_sel(0) => an(0)
 	   );
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	-- LED 15 gets the FSM slow clock signal. The rest are grounded.
 	led(15) <= w_clk;
-	an(2) <= '1';
-	an(1) <= '1';
 	-- leave unused switches UNCONNECTED. Ignore any warnings this causes.
 	led(14 downto 0) <= "000000000000000";
 	-- reset signals
