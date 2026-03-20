@@ -30,6 +30,7 @@ architecture top_basys3_arch of top_basys3 is
     signal w_floor1 : std_logic_vector(3 downto 0);
     signal w_floor2 : std_logic_vector(3 downto 0);
     signal w_seg_n : std_logic_vector(3 downto 0);
+    signal w_useless : std_logic_vector(1 downto 0);
 --    signal w_seg_n2 : std_logic_vector(3 downto 0);
 	-- component declarations
     component sevenseg_decoder is
@@ -128,13 +129,15 @@ begin
 		   o_data => w_seg_n,
 		   o_sel(3) => an(0),
 		   o_sel(2) => an(3),
-		   o_sel(1) => an(2),
-		   o_sel(0) => an(1)
+		   o_sel(1) => w_useless(1),
+		   o_sel(0) => w_useless(0)
 	   );
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	-- LED 15 gets the FSM slow clock signal. The rest are grounded.
 	led(15) <= w_clk;
+	an(1) <= '1';
+	an(2) <= '1';
 	-- leave unused switches UNCONNECTED. Ignore any warnings this causes.
 	led(14 downto 0) <= "000000000000000";
 	-- reset signals
